@@ -1,0 +1,204 @@
+.header{
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 448px;
+    width: 100%;
+    min-width: 1200px;
+    position: relative;
+    background-position: center center;
+    background-size: cover;
+    background-image: url("http://huahui-website.oss-cn-shanghai.aliyuncs.com/huahui/index/news-rc-upload-1610692732900-35.png");
+}
+.header_text{
+    width: 1200px;
+    margin: 0 auto;
+    padding-top: 164px;
+    height: 84px;
+    color: rgba(255, 255, 255, 100);
+    font-size: 60px;
+    text-align: left;
+    font-family: PingFang-SC-Bold;
+}
+.introduc_line{
+    margin-top: 12px;
+    width: 80px;
+    height: 11px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 1);
+}
+.content_top{
+    color: rgba(0, 0, 0, 1);
+    font-size: 24px;
+    text-align: left;
+    font-family: PingFangSC-Medium;
+    padding:32px 0px 15px 24px ;
+    border-bottom: 1px dashed rgba(226, 226, 226, 1);
+}
+.content_flex{
+    padding-top: 32px;
+    padding-bottom: 133px;
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+}
+.content_list :global{
+    .ant-menu-submenu-title{
+        color: rgba(0, 0, 0, 0.85);
+        font-size: 18px;
+        text-align: left;
+        font-family: PingFangSC-Medium;
+    }
+    .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
+        background-color: white !important;
+    }
+    .ant-menu-item-selected a{
+        color: rgba(0, 0, 0, 0.85);
+    }
+    .ant-menu-inline .ant-menu-item::after{
+        border-right: none;
+    }
+    .ant-menu-inline{
+        border-right: none;
+    }
+    .ant-menu-item{
+        border-bottom: 1px dashed rgba(226, 226, 226, 1);
+        font-size: 18px;
+        text-align: left;
+        font-family: PingFangSC-Regular;
+        border-bottom: 1px dashed rgba(226, 226, 226, 1);
+    }
+}
+
+//列表
+.introduc{
+    width: 100%;
+    position: relative;
+    margin-left: 39px;
+}
+.breadcrumb{
+    position: absolute;
+    right: 0;
+}
+.introduc_title{
+    margin-top: 32px;
+    height: 100px;
+    font-size: 32px;
+    text-align: center;
+    color:#C2264E ;
+}
+.newsList_ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.newsList_ul li{
+    cursor: pointer;
+    float: left;
+    position: relative;
+    width: 434px;
+    height: 82px;
+    display: flex;
+    background-color: #FBFBFB ;
+    margin-left: 18px;
+    margin-bottom: 32px;
+}
+.newsList_ul_img{
+    width: 120px;
+    height: 82px;
+    overflow: hidden;
+    background-color: #f2f2f2;
+}
+.newsList_ul_text {
+    width: 246px;
+    padding:  11px 30px 11px 32px;
+}
+.newsList_ul_text div:first-child span{
+    display: inline-block;
+    height: 40px;
+    width: 224px;
+    line-height: 20px;
+    color: rgba(102, 102, 102, 100);
+    font-size: 14px;
+    text-align: left;
+    font-family: PingFang-SC-Bold;
+    word-wrap: break-word;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+.newsList_ul_text div:last-child{
+    color: rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+    text-align: left;
+    font-family: PingFang-SC-Bold;
+}
+.icon{
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+}
+.page{
+    text-align: center;
+    clear: both;
+}
+.newsList_ul :global{
+    .ant-skeleton-content .ant-skeleton-title + .ant-skeleton-paragraph{
+        margin-top: 0;
+    }
+    .ant-skeleton-element .ant-skeleton-image{
+        width: 120px;
+        height: 82px;
+    }
+}
+
+
+
+//详情
+.introduc{
+    width: 100%;
+    position: relative;
+    margin-left: 39px;
+}
+.breadcrumb{
+    position: absolute;
+    right: 0;
+}
+.news_title{
+    margin-top: 32px;
+    height: 60px;
+    font-size: 24px;
+    text-align: center;
+    color:#58585E ;
+}
+.news_des{
+    height: 60px;
+    font-size: 14px;
+    text-align: center;
+    color:#58585E ;
+}
+.news_des span{
+    display: inline-block;
+    margin: 0 15px 0 5px;
+}
+.news_content{
+    line-height: 28px;
+    color: rgba(88, 88, 94, 100);
+    font-size: 14px;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+}
+.contentNext{
+    margin-top: 32px;
+    color: rgba(194, 38, 78, 100);
+    font-size: 14px;
+    text-align: left;
+    font-family: PingFangSC-Light;
+}
+.contentNext a{
+    color: rgba(194, 38, 78, 100) !important;
+    font-size: 14px;
+    text-align: left;
+    font-family: PingFangSC-Light;
+}

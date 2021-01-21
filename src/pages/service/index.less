@@ -1,0 +1,185 @@
+.header{
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 448px;
+    width: 100%;
+    min-width: 1200px;
+    position: relative;
+    background-position: center center;
+    background-size: cover;
+    background-image: url("http://huahui-website.oss-cn-shanghai.aliyuncs.com/huahui/index/serve_bg-rc-upload-1610692732900-31.png");
+}
+.header_text{
+    width: 1200px;
+    margin: 0 auto;
+    padding-top: 164px;
+    height: 84px;
+    color: rgba(255, 255, 255, 100);
+    font-size: 60px;
+    text-align: left;
+    font-family: PingFang-SC-Bold;
+}
+.introduc_line{
+    margin-top: 12px;
+    width: 80px;
+    height: 11px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 1);
+}
+.content_top{
+    color: rgba(0, 0, 0, 1);
+    font-size: 24px;
+    text-align: left;
+    font-family: PingFangSC-Medium;
+    padding:32px 0px 15px 24px ;
+    border-bottom: 1px dashed rgba(226, 226, 226, 1);
+}
+.content_flex{
+    padding-top: 32px;
+    padding-bottom: 133px;
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+}
+.content_list :global{
+    .ant-menu-submenu-title{
+        color: rgba(0, 0, 0, 0.85);
+        font-size: 18px;
+        text-align: left;
+        font-family: PingFangSC-Medium;
+    }
+    .ant-menu-sub.ant-menu-inline > .ant-menu-item{
+        font-size: 18px;
+        text-align: left;
+        font-family: PingFangSC-Regular;
+        border-bottom: 1px dashed rgba(226, 226, 226, 1);
+    }
+    .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
+        background-color: white !important;
+    }
+    .ant-menu-inline .ant-menu-item::after{
+        border-right: none;
+    }
+    .ant-menu-inline{
+        border-right: none;
+    }
+    .ant-menu-submenu-title{
+        border-bottom: 1px dashed rgba(226, 226, 226, 1);
+    }
+}
+
+.introduc{
+    width: 100%;
+    position: relative;
+    margin-left: 39px;
+}
+.breadcrumb{
+    position: absolute;
+    right: 0;
+}
+.news_title{
+    margin-top: 32px;
+    height: 60px;
+    font-size: 24px;
+    text-align: center;
+    color:#58585E ;
+}
+.introduc_content_1{
+    width: 100%;
+    display: flex;
+    justify-content:space-between
+}
+.introduc_text{
+    width: 481px;
+    line-height: 25px;
+    color: rgba(102, 102, 102, 100);
+    font-size: 16px;
+    text-align: left;
+    font-family: PingFang-SC-Bold;
+}
+.introduc_content_img{
+    margin-right: 32px;
+    width: 386px;
+    height: 226px;
+    // overflow: hidden;
+}
+.introduc_content_img img{
+    // width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.introduc_content_1 :global{
+    .ant-skeleton-content{
+        width: 460px;
+    }
+    .ant-skeleton-element .ant-skeleton-image{
+        width: 386px;
+        height: 226px;
+    }
+}
+.line{
+    margin: 34px 0;
+    height: 1px;
+    border-top: 1px solid rgba(229, 229, 229, 1);
+    text-align: center;
+}
+.title_little{
+    line-height: 33px;
+    color: rgba(88, 104, 122, 100);
+    font-size: 22px;
+    text-align: left;
+    font-family: PingFangSC-Medium;
+    margin-bottom: 16px;
+}
+.title_little::before{
+    content: "";
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #C2264E;
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: middle;
+    margin-top: -2px;
+}
+.one{
+    border:4px solid transparent;
+    width: 0;
+    border-bottom:4px solid #C2264E;
+}
+.two{
+    border: 4px solid transparent;
+    width: 0;
+    border-top: 4px solid #C2264E;
+}
+.text_flex>div{
+    align-items: center;
+    margin-right: 10px;
+    margin-top: 3px;
+    padding-left: 4px;
+}
+.text_flex{
+    color: rgba(88, 88, 94, 100);
+    font-size: 14px;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+    margin-bottom: 16px;
+    display: flex;
+}
+.text{
+    color: rgba(88, 88, 94, 100);
+    font-size: 14px;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+    margin-bottom: 16px;
+}
+.text_flex span{
+    display: inline-block;
+}
+.text_flex>span:first-child{
+    width: 100px !important;
+}
+.text_flex>span:last-child{
+    width: 810px;
+}

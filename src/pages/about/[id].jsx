@@ -7,6 +7,7 @@ import Honor from './honor';
 import Test from './test';
 import Contact from './contact';
 import { __GET } from '../utils/fetchUtils.js';
+import { Helmet } from 'umi';
 
 const { SubMenu } = Menu;
 export default class index extends Component {
@@ -75,6 +76,9 @@ export default class index extends Component {
     render() {
         return (
             <div>
+                <Helmet encodeSpecialCharacters={false}>
+                    <title>关于我们、建材防火检测、上海防火检测机构、华慧检测</title>
+                </Helmet>
                 <div className={styles.header}>
                     <div className={styles.header_text}>
                         国内专业的防火检测一站式服务企业

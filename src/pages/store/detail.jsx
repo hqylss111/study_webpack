@@ -20,45 +20,45 @@ export default class id extends Component {
             url: props.url,
             data: [],
             store: {
-                title:'建筑工业标准（JG）'
+                title: '建筑工业标准（JG）'
             },
         }
         console.log(this.state.id, this.state.type, this.state.url, '222');
 
     }
     componentDidMount() {
-        // let url = `/api/standard/library/type/list`;
-        // __GET(url)
-        //     .then(response => {
-        //         return response.json();
-        //     })
-        //     .then(myJson => {
-        //         this.setState({
-        //             ...this.state,
-        //             data: myJson,
-        //         })
-        //         // console.log('this.state.data', this.state.data);
-        //     })
-        //     .catch(error => {
-        //         console.log('error', error);
-        //     });
-        // let urlCon = `/api/standard/library/type/${this.state.type}/${this.state.id}`;
-        // console.log(urlCon);
+        let url = `/api/standard/library/type/list`;
+        __GET(url)
+            .then(response => {
+                return response.json();
+            })
+            .then(myJson => {
+                this.setState({
+                    ...this.state,
+                    data: myJson,
+                })
+                // console.log('this.state.data', this.state.data);
+            })
+            .catch(error => {
+                console.log('error', error);
+            });
+        let urlCon = `/api/standard/library/type/${this.state?.type}/${this.state?.id}`;
+        console.log(urlCon);
 
-        // __GET(urlCon)
-        //     .then(response => {
-        //         return response.json();
-        //     })
-        //     .then(myJson => {
-        //         this.setState({
-        //             ...this.state,
-        //             store: myJson,
-        //         })
-        //         this.props.getChildValue(this.state.store?.title)
-        //     })
-        //     .catch(error => {
-        //         console.log('error', error);
-        //     });
+        __GET(urlCon)
+            .then(response => {
+                return response.json();
+            })
+            .then(myJson => {
+                this.setState({
+                    ...this.state,
+                    store: myJson,
+                })
+                this.props.getChildValue(this.state?.store?.title)
+            })
+            .catch(error => {
+                console.log('error', error);
+            });
     }
     copySuccess = () => {
         let share = `${window.location.host}${this.state.url}?type=${this.state.type}&&id=${this.state.id}`
@@ -67,7 +67,8 @@ export default class id extends Component {
         console.log(share);
     }
     download = () => {
-        window.open(this.state.store.downloadUrl)
+        this.state?.store?.downloadUrl&&
+        window.open(this.state?.store?.downloadUrl)
     }
     render() {
         return (
@@ -84,7 +85,7 @@ export default class id extends Component {
                                     <MyIcon type='iconlujing' className={styles.icon} />分享
                                 </span> */}
                                 {
-                                    !this.state.store.downloadUrl ?
+                                    this.state?.store?.downloadUrl ?
                                         <span style={{ marginLeft: "48px" }} onClick={this.download}>
                                             <MyIcon type='icon-xiazai' className={styles.icon} />
                                             <span className={styles.uploadColor}>下载</span>

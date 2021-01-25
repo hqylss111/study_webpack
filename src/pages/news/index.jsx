@@ -4,6 +4,7 @@ import styles from './index.less';
 import { MyIcon } from '../../pages/utils/index.js';
 import { __GET } from '../utils/fetchUtils.js';
 import moment from 'moment'
+import { Helmet } from 'umi';
 
 const { SubMenu } = Menu;
 export default class index extends Component {
@@ -77,6 +78,9 @@ export default class index extends Component {
     render() {
         return (
             <div>
+                <Helmet encodeSpecialCharacters={false}>
+                    <title>新闻资讯、防火检测、耐火检测、华慧检测</title>
+                </Helmet>
                 <div className={styles.header}>
                     <div className={styles.header_text}>
                         新闻资讯

@@ -275,7 +275,7 @@ export default function Index(props) {
                                     <div className={styles.title_Item2}>{item.text}</div>
                                     <div className={styles.nav_list}>
                                         {
-                                            index == 1 &&
+                                            index == 1&& listNew.length>0 &&
                                             listNew.map((items, i) => {
                                                 return <NavLink key={i} exact to={`/about/${items.id}`}>
                                                     <div className={styles.titleItem}>
@@ -285,7 +285,7 @@ export default function Index(props) {
                                             })
                                         }
                                         {
-                                            index == 2 &&
+                                            index == 2&&service.length>0 &&
                                             service.map((items, i) => {
                                                 return <NavLink key={i} exact to={`/service?id=${items.id}&i=${i}`}>
                                                     <div className={styles.titleItem}>
@@ -351,7 +351,7 @@ export default function Index(props) {
 
                                                             }
                                                             {
-                                                                index == 1 &&
+                                                                index == 1 &&listNew.length>0&&
                                                                 listNew.map((it, i) => {
                                                                     return <li onClick={e => { pushRouter(`/about/${it.id}`) }} key={i}>
                                                                         <a >{it.subtitle}</a>
@@ -359,7 +359,7 @@ export default function Index(props) {
                                                                 })
                                                             }
                                                             {
-                                                                index == 2 &&
+                                                                index == 2 &&service.length>0&&
                                                                 service.map((it, i) => {
                                                                     return <li onClick={e => { pushRouter(`/service?id=${it.id}&i=${i}`) }} key={i}>
                                                                         <a >{it.title}</a>

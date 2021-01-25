@@ -11,72 +11,64 @@ export default class index extends Component {
         super()
         this.state = {
             titleList: [
-                { title: '国家标准（GB）' },
-                { title: '建筑材料标准（JC）' },
-                { title: '建筑工业标准（JG）' },
-                { title: '环境保护标准（HJ）' },
-                { title: '船舶标准（CB）' },
-                { title: '汽车标准（QC）' },
-                { title: '民用航空标准（MH）' },
-                { title: '铁路运输标准（TB）' },
-                { title: '交通标准（JT）' },
-                { title: '纺织标准（FZ）' },
             ],
-            storelist: [
-                {
-                    id: 1,
-                    title: 'GB 50016-2014(2018年版) 建筑设计防火规范',
-                    createTime: '2020-09-27'
-                },
-                {
-                    id: 2,
-                    title: 'GB 50016-2014(2018年版) 建筑设计防火规范',
-                    createTime: '2020-09-27'
-                },
-                {
-                    id: 3,
-                    title: 'GB 50016-2014(2018年版) 建筑设计防火规范',
-                    createTime: '2020-09-27'
-                },
-                {
-                    id: 4,
-                    title: 'GB 50016-2014(2018年版) 建筑设计防火规范',
-                    createTime: '2020-09-27'
-                },
-            ],
+            storelist: [],
             myid: (props.location.query.id ? props.location.query.id : null),
-            type: (props.location.query.type ? props.location.query.type : 'environmental_protection'),
+            type: (props.location.query.type ? props.location.query.type : 'library_gbnational_standard'),
             nowPage: 1,
             currentIndex: 0,
             pageSize: 20,
             myTitle: '国家标准（GB）'
         }
+
+    }
+    componentDidMount() {
+        let url = `/api/standard/library/type/list`;
+        fetch(url)
+            .then(response => {
+                return response.json();
+            })
+            .then(myJson => {
+                this.setState({
+                    ...this.state,
+                    titleList: myJson,
+                })
+                console.log(myJson);
+
+            })
+            .catch(error => {
+                console.log('error', error);
+            });
+        this.getInfo(this.state.nowPage, this.state.type)
     }
     getInfo = (page, type) => {
-        // let urlList = `/api/standard/library/type/${type ? type : 'environmental_protection'}/list?page=${page}&limit=${this.state.pageSize}`;
-        // fetch(urlList)
-        //     .then(response => {
-        //         return response.json();
-        //     })
-        //     .then(myJson => {
-        //         this.setState({
-        //             ...this.state,
-        //             store: myJson,
-        //             storelist: myJson.data,
-        //             type: type
-        //         })
-        //         // console.log('this.state.store', this.state.storelist);
-        //     })
-        //     .catch(error => {
-        //         console.log('error', error);
-        //     });
+        console.log(page, type, '000');
+
+        let urlList = `/api/standard/library/type/${type ? type : 'library_gbnational_standard'}/list?limit=${this.state.pageSize}&page=${page}`;
+        // let urlList = `/api/standard/library/type/${type ? type : 'library_gbnational_standard'}/list?page=${page}&limit=${this.state.pageSize}`;
+        fetch(urlList)
+            .then(response => {
+                return response.json();
+            })
+            .then(myJson => {
+                this.setState({
+                    ...this.state,
+                    store: myJson,
+                    storelist: myJson.data,
+                    type: type
+                })
+                console.log('this.state.store', this.state.store);
+            })
+            .catch(error => {
+                console.log('error', error);
+            });
     }
-    changeStore = (type) => {
+    changeStore = (title, type) => {
         this.getInfo(1, type)
         this.setState({
             currentIndex: index,
-            myTitle: type,
-            myid:null
+            myTitle: title,
+            myid: null
         })
     }
     onChange = (page, pageSize) => {
@@ -116,11 +108,12 @@ export default class index extends Component {
                             mode="inline"
                         >
                             {
-                                this.state.titleList.map((item, index) => {
+                                this.state?.titleList?.length>0&&
+                                this.state?.titleList.map((item, index) => {
                                     return <Menu.Item
                                         key={index + 1}
                                         index={index}
-                                        onClick={() => this.changeStore(item.title, index)}
+                                        onClick={() => this.changeStore(item.title, item.type)}
                                     >
                                         {item.title}
                                     </Menu.Item>
@@ -156,15 +149,15 @@ export default class index extends Component {
                                                 <td>时间</td>
                                             </tr>
                                             {
-                                                this.state.storelist?.length > 0 ?
-                                                    this.state.storelist.map((item, index) => {
+                                                this.state?.storelist?.length > 0 ?
+                                                    this.state?.storelist.map((item, index) => {
                                                         return <tr className={styles.contentTr} key={index} onClick={() => this.getId(item.id)}
                                                             style={(index % 2 != 0) ? { backgroundColor: "#F2F2F2" } : { backgroundColor: "#fff" }} >
                                                             <td >
                                                                 <a ><span className={styles.leftTb}>{item.title}</span> </a>
                                                             </td>
                                                             <td className={styles.dateTr}>
-                                                                <a >{moment(item.createTime).format('YYYY-MM-DD')}</a>
+                                                                <a >{item.createTime}</a>
                                                             </td>
                                                         </tr>
                                                     })
@@ -182,7 +175,7 @@ export default class index extends Component {
                                     <div className={styles.page}>
                                         <Pagination
                                             size="small"
-                                            total={this.state.storelist.length}
+                                            total={this.state?.store?.count}
                                             current={this.state.nowPage}
                                             showSizeChanger={false}
                                             showQuickJumper

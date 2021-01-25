@@ -7,6 +7,7 @@ import { MyIcon } from '../pages/utils/index.js';
 import { Skeleton } from 'antd';
 import { __GET } from './utils/fetchUtils.js';
 import moment from 'moment'
+import { Helmet } from 'umi';
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -203,6 +204,9 @@ export default class index extends Component {
     };
     return (
       <div>
+         <Helmet encodeSpecialCharacters={false}>
+          <title>防火检测报告、耐火极限检测、防火检测机构、华慧检测</title>
+        </Helmet>
         <div className={styles.ImgHint}>
           <div className={styles.ImgText}>
             <div className={styles.text}>国内专业防火检测实验室</div>

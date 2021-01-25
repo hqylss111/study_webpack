@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Menu, Breadcrumb, Pagination, Skeleton } from 'antd';
 import styles from './index.less';
 import { __GET } from '../utils/fetchUtils.js';
+import { Helmet } from 'umi';
 
 const { SubMenu } = Menu;
 export default class index extends Component {
@@ -47,8 +48,8 @@ export default class index extends Component {
                         myJson[0].title
                 });
 
-                if(this.state.myId)
-                this.getService()
+                if (this.state.myId)
+                    this.getService()
 
                 console.log(myJson, '11111111');
 
@@ -83,8 +84,8 @@ export default class index extends Component {
             myTitle: title
         })
         setTimeout(() => {
-            if(this.state.myId)
-            this.getService()
+            if (this.state.myId)
+                this.getService()
         }, 0);
     }
     changeTitle = (title) => {
@@ -96,6 +97,9 @@ export default class index extends Component {
     render() {
         return (
             <div>
+                <Helmet encodeSpecialCharacters={false}>
+                    <title>防火材料检测、防火等级检测、耐火材料检测、华慧检测</title>
+                </Helmet>
                 <div className={styles.header}>
                     <div className={styles.header_text}>
                         防火阻燃检测
@@ -105,12 +109,12 @@ export default class index extends Component {
                 <div className={styles.content_flex}>
                     <div className={styles.content_list}>
                         <div className={styles.content_top}>业务领域</div>
-                        {console.log(this.props.location.query.i) }
+                        {console.log(this.props.location.query.i)}
                         <Menu
                             onClick={this.handleClick}
                             style={{ width: 256 }}
                             defaultSelectedKeys={['1']}
-                            defaultOpenKeys={[this.props.location.query.i?this.props.location.query.i:'0']}
+                            defaultOpenKeys={[this.props.location.query.i ? this.props.location.query.i : '0']}
                             mode="inline"
                         >
                             {
@@ -166,7 +170,7 @@ export default class index extends Component {
 
                             </div>
                         </div>
-                        { this.state.service!=[] ?
+                        {this.state.service != [] ?
                             this.state?.service.map((item, index) => {
                                 return <div key={index}>
                                     <div className={styles.line}></div>
@@ -202,8 +206,8 @@ export default class index extends Component {
                                                 </div>
                                                 <span>检测标准：</span>
                                             </div>
-
                                             <div
+                                                style={{ marginLeft: '20px' }}
                                                 dangerouslySetInnerHTML={{ __html: item.content }}
                                             ></div>
                                         </div>

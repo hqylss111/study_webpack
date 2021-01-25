@@ -48,6 +48,7 @@ export default class honor extends Component {
             centerPadding: "0px",
             slidesToShow: 5,
             speed: 400,
+            autoplay: true,
         };
        
         return (

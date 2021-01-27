@@ -161,9 +161,11 @@ export default class index extends Component {
                                 {
                                     this.state?.business?.content ?
                                         <div
+                                            style={{ whiteSpace: 'pre-line' }}
                                             className={styles.introduc_text}
-                                            dangerouslySetInnerHTML={{ __html: this.state?.business?.content }}
+                                        // dangerouslySetInnerHTML={{ __html: this.state?.business?.content }}
                                         >
+                                            {this.state?.business?.content}
                                         </div>
                                         : <Skeleton />
                                 }
@@ -185,8 +187,11 @@ export default class index extends Component {
                                             </div>
                                             <span>标准名称：</span>
                                             <span
-                                                dangerouslySetInnerHTML={{ __html: item.standard }}
-                                            ></span>
+                                                style={{ whiteSpace: 'pre-line' }}
+                                            // dangerouslySetInnerHTML={{ __html: item.standard }}
+                                            >
+                                                {item.standard}
+                                            </span>
                                         </div>
                                         <div className={styles.text_flex}>
                                             <div>
@@ -195,8 +200,11 @@ export default class index extends Component {
                                             </div>
                                             <span>标准介绍：</span>
                                             <span
-                                                dangerouslySetInnerHTML={{ __html: item.introduction }}
-                                            ></span>
+                                             style={{ whiteSpace: 'pre-line' }}
+                                                // dangerouslySetInnerHTML={{ __html: item.introduction }}
+                                            >
+                                                { item.introduction }
+                                            </span>
                                         </div>
                                         <div className={styles.text}>
                                             <div className={styles.text_flex}>

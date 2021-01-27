@@ -8,26 +8,25 @@ export default class introduc extends Component {
         super()
         this.state = {
             id: props.id,
-            introduc: {}
+            introduc: {},
+            content1:'',
+            content2:'',
+            content3:'',
         }
-        console.log(props, '111111');
     }
     componentDidMount() {
         this.getList(this.state.id)
-       
     }
     componentWillUpdate(prevProps, prevState) {
         if (prevProps.id != this.state.id) {
             this.getList(prevProps.id)
             this.setState({
-                id:prevProps.id
+                id: prevProps.id
             })
         }
-        console.log(prevState,prevProps,this.state.id);
     }
-    getList = (id) => {
-        console.log(this.state.id, 'this.state.id');
 
+    getList = (id) => {
         let url = `/api/testing/organization/select/${id}/introduce`;
         __GET(url)
             .then(response => {
@@ -38,7 +37,6 @@ export default class introduc extends Component {
                     ...this.state,
                     introduc: myJson,
                 });
-                // console.log(myJson);
             })
             .catch(error => {
                 console.log(error);
@@ -51,7 +49,7 @@ export default class introduc extends Component {
         return (
             <div className={styles.introduc}>
                 <Breadcrumb className={styles.breadcrumb}>
-                <Breadcrumb.Item
+                    <Breadcrumb.Item
                         onClick={e => {
                             this.pushRouter(`/`)
                         }}
@@ -82,18 +80,19 @@ export default class introduc extends Component {
                             <div className={styles.introduc_line}></div>
                             {
                                 this.state.introduc.content1 ?
-                                    <div className={styles.introduc_text}>
+                                    <div className={styles.introduc_text} style={{whiteSpace:'pre-line' }}>
                                         {this.state.introduc.content1}
                                     </div>
                                     : <Skeleton />
                             }
+                            {console.log(this.state.introduc.content1) }
                         </div>
                     </div>
                     <div className={styles.introduc_content_2}>
                         <div className={styles.introduc_line}></div>
                         {
                             this.state.introduc.content2 ?
-                                <div className={styles.introduc_text}>
+                                <div className={styles.introduc_text} style={{whiteSpace:'pre-line' }}>
                                     {this.state.introduc.content2}
                                 </div>
                                 : <Skeleton />
@@ -103,7 +102,7 @@ export default class introduc extends Component {
                         <div className={styles.introduc_line}></div>
                         {
                             this.state.introduc.content3 ?
-                                <div className={styles.introduc_text}>
+                                <div className={styles.introduc_text} style={{whiteSpace:'pre-line' }}>
                                     {this.state.introduc.content3}
                                 </div>
                                 : <Skeleton />

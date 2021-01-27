@@ -39,7 +39,7 @@ export default class index extends Component {
     }
   }
   componentDidMount() {
-    
+
     this.serveNew()
     this.mechanismNew()
     this.newsNew()
@@ -67,10 +67,12 @@ export default class index extends Component {
         return response.json();
       })
       .then(myJson => {
-        this.setState({
-          ...this.state,
-          mechanism: myJson,
-        });
+          this.setState({
+            ...this.state,
+            mechanism: myJson,
+          });
+        console.log(this.state.mechanism[0].description);
+
       })
       .catch(error => {
         console.log(error);
@@ -118,7 +120,6 @@ export default class index extends Component {
       .catch(error => {
         console.log(error);
       });
-
   }
   companyNew = () => {
     let company_new = []
@@ -204,7 +205,7 @@ export default class index extends Component {
     };
     return (
       <div>
-         <Helmet encodeSpecialCharacters={false}>
+        <Helmet encodeSpecialCharacters={false}>
           <title>防火检测报告、耐火极限检测、防火检测机构、华慧检测</title>
         </Helmet>
         <div className={styles.ImgHint}>
@@ -214,7 +215,7 @@ export default class index extends Component {
               <span className={styles.itemText}>为工程建筑公司、装饰装修公司、材料厂家提供专业阻燃检测服务</span>
             </div>
             <div onClick={e => {
-             this.pushRouter(`/service`)
+              this.pushRouter(`/service`)
             }}>
               {/* <a href="/service"> */}
               <button className={styles.immediately} >查看详情    </button>
@@ -368,7 +369,10 @@ export default class index extends Component {
                           <div className={styles.subsidiary_company}>
                             <div className={styles.subsidiary_title}>{item.enterpriseTitle}</div>
                             <div >
-                              <div className={styles.subsidiary_text}>{item.description}</div>
+                              <div
+                                className={styles.subsidiary_text}
+                                style={{whiteSpace:'pre-line' }}
+                              >{item.description}</div>
                             </div>
                           </div>
                           {/* <a href={`/about/${item.id}`}> */}
@@ -412,7 +416,7 @@ export default class index extends Component {
                   <ul className={styles.news_ul}>
                     {
                       this.state.newsEnterprise.map((item, i) => {
-                        return <a onClick={e => {this.pushRouter(`/news/${item.id}?myI=${0}`)}} key={i}>
+                        return <a onClick={e => { this.pushRouter(`/news/${item.id}?myI=${0}`) }} key={i}>
                           <li key={i}>
                             <div
                               className={i == 0 ? styles.news_number_1 : styles.news_number &&
@@ -455,7 +459,7 @@ export default class index extends Component {
                   <ul className={styles.news_ul}>
                     {
                       this.state.newsIndustry.map((item, i) => {
-                        return <a  key={i} onClick={e => {this.pushRouter(`/news/${item.id}?myI=${1}`)}}>
+                        return <a key={i} onClick={e => { this.pushRouter(`/news/${item.id}?myI=${1}`) }}>
                           <li key={i}>
                             <div
                               className={i == 0 ? styles.news_number_1 : styles.news_number &&

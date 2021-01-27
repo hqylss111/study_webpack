@@ -13,10 +13,19 @@ export default class contact extends Component {
         }
     }
     componentDidMount() {
-        this.getList()
+        this.getList(this.state.id)
     }
-    getList = () => {
-        let url = `/api/testing/organization/select/${this.state.id}/us`;
+    componentWillUpdate(prevProps, prevState) {
+        if (prevProps.id != this.state.id) {
+            this.getList(prevProps.id)
+            this.setState({
+                id:prevProps.id
+            })
+        }
+        console.log(prevState,prevProps,this.state.id);
+    }
+    getList = (id) => {
+        let url = `/api/testing/organization/select/${id}/us`;
         __GET(url)
             .then(response => {
                 return response.json();

@@ -17,10 +17,19 @@ export default class honor extends Component {
         }
     }
     componentDidMount() {
-        this.getList()
+        this.getList(this.state.id)
     }
-    getList = () => {
-        let url = `/api/testing/organization/select/${this.state.id}/honor`;
+    componentWillUpdate(prevProps, prevState) {
+        if (prevProps.id != this.state.id) {
+            this.getList(prevProps.id)
+            this.setState({
+                id:prevProps.id
+            })
+        }
+        console.log(prevState,prevProps,this.state.id);
+    }
+    getList = (id) => {
+        let url = `/api/testing/organization/select/${id}/honor`;
         __GET(url)
             .then(response => {
                 return response.json();
@@ -73,7 +82,7 @@ export default class honor extends Component {
                 <div className={styles.introduc_title}>资质荣誉</div>
                 {
                     this.state.data.content ?
-                        <div className={styles.text}>
+                        <div className={styles.text} style={{whiteSpace:'pre-line' }}>
                             {this.state.data.content}
                         </div>
                         :

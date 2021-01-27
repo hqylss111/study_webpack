@@ -12,15 +12,24 @@ export default class Environmental extends Component {
         }
     }
     componentDidMount() {
-        this.getList()
+        this.getList(this.state.id)
         // if (this.props.location.query.id != nextProps.location.query.id) {
         //     history.go(0)
         // }
         console.log(this.props.id, this.props.keyName, 'nextProps.location.query.id');
 
     }
-    getList = () => {
-        let url = `/api/testing/organization/select/${this.state.id}/style`;
+    componentWillUpdate(prevProps, prevState) {
+        if (prevProps.id != this.state.id) {
+            this.getList(prevProps.id)
+            this.setState({
+                id:prevProps.id
+            })
+        }
+        console.log(prevState,prevProps,this.state.id);
+    }
+    getList = (id) => {
+        let url = `/api/testing/organization/select/${id}/style`;
         __GET(url)
             .then(response => {
                 return response.json();
@@ -92,7 +101,7 @@ export default class Environmental extends Component {
                     </div>
                     {
                         this.state.data.content1 ?
-                            <div className={styles.compan_text}>
+                            <div className={styles.compan_text} style={{whiteSpace:'pre-line' }}>
                                 {this.state.data.content1}
                             </div>
                             :
@@ -103,7 +112,7 @@ export default class Environmental extends Component {
                     <div className={styles.list_title}>{this.state.data.subhead2}</div>
                     {
                         this.state.data.content2 ?
-                            <div className={styles.compan_text02}>
+                            <div className={styles.compan_text02} style={{whiteSpace:'pre-line' }}>
                                 {this.state.data.content2}
                             </div>
                             :

@@ -391,7 +391,7 @@ export default function Index(props) {
                                     <MyIcon type='icon-email' className={styles.icon} />
                                     <div className={styles.emailOut} >
                                         邮箱：
-                                        <span className={styles.email}>{enterprise.enterpriseEmail}</span>
+                                        <span className={styles.email} style={{whiteSpace:'pre-line' }}>{enterprise.enterpriseEmail}</span>
                                     </div>
                                 </div>
                                 <div className={styles.right_text}>
@@ -425,7 +425,7 @@ export default function Index(props) {
                                 <div className={styles.footLinkName}>
                                     {
                                         link.map((item, index) => {
-                                            return <a href={item.url} key={index} className={styles.src} target="_blank" rel="nofollow">{item.name}</a>
+                                            return <a href={item.url} key={index} className={styles.src} target="_blank" >{item.name}</a>
                                         })
                                     }
                                 </div>

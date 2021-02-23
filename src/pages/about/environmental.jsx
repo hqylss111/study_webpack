@@ -16,7 +16,7 @@ export default class Environmental extends Component {
         // if (this.props.location.query.id != nextProps.location.query.id) {
         //     history.go(0)
         // }
-        console.log(this.props.id, this.props.keyName, 'nextProps.location.query.id');
+        // console.log(this.props.id, this.props.keyName, 'nextProps.location.query.id');
 
     }
     componentWillUpdate(prevProps, prevState) {
@@ -26,7 +26,7 @@ export default class Environmental extends Component {
                 id:prevProps.id
             })
         }
-        console.log(prevState,prevProps,this.state.id);
+        // console.log(prevState,prevProps,this.state.id);
     }
     getList = (id) => {
         let url = `/api/testing/organization/select/${id}/style`;

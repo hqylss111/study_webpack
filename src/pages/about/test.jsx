@@ -12,9 +12,7 @@ export default class test extends Component {
                     title: '咨询沟通',
                     icon: 'icon-zx',
                     content: `客户与技术人员进行沟通，对样品测试要求达成共识。
-                    咨询电话:
-                    手机/微信:
-                    `
+                    联系方式：`
                 },
                 {
                     title: '准备样品、填写委托单',
@@ -47,11 +45,31 @@ export default class test extends Component {
                     content: '报告完成后，线上发送电子版报告，线下可邮寄或由客户自行取回。'
                 },
             ],
-            test_new: []
+            test_new: [],
+            tel: '18951384587',
+            id: props.id,
+
         }
     }
     componentDidMount() {
         this.testNew()
+        let tel = ''
+        tel = this.state.id == 1 ?  '18951384587':'13235217906' 
+        this.setState({
+            tel: tel
+        })
+    }
+    componentWillUpdate(prevProps, prevState) {
+        if (prevProps.id != this.state.id) {
+            this.setState({
+                id: prevProps.id
+            })
+            let tel = ''
+            tel = this.state.id == 1 ?  '13235217906':'18951384587' 
+            this.setState({
+                tel: tel
+            })
+        }
     }
     testNew = () => {
         let test_new = []
@@ -79,7 +97,7 @@ export default class test extends Component {
         this.setState({
             test_new
         })
-        console.log(test_new, '0000');
+        // console.log(test_new, '0000');
 
     }
     pushRouter = (url) => {
@@ -123,8 +141,8 @@ export default class test extends Component {
                                             : <></>
                                     }
                                 </div>
-                                <div className={styles.compan_text}>
-                                    {item.content}
+                                <div className={styles.compan_text} style={{ whiteSpace: 'pre-line' }}>
+                                    {item.content}{ index==0&&this.state.tel}
                                 </div>
                             </div>
                         })

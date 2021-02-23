@@ -12,7 +12,7 @@ export default class index extends Component {
         super()
         this.state = {
             newsType: [
-                '公司资讯', '行业新闻'
+                '行业新闻', '公司资讯'
             ],
             count: 0,
             newsList: [],
@@ -26,16 +26,14 @@ export default class index extends Component {
             news_content: {},
             id: props.match.params.id ? props.match.params.id : 0
         }
-        console.log(props, '111111')
     }
     componentDidMount() {
         this.getData(this.state.nowPage)
         this.getData2()
     }
     getData = (page) => {
-        // console.log(this.state.myI, 'myI1111111');
 
-        let url = this.state.myI == 0 ?
+        let url = this.state.myI == 1 ?
             `/api/news/enterprise/select/list?limit=${this.state.pageSize}&page=${page}`
             : `/api/news/industry/select/list?limit=${this.state.pageSize}&page=${page}`;
         __GET(url)
@@ -54,7 +52,7 @@ export default class index extends Component {
             });
     }
     getData2 = () => {
-        let url = this.state.myI == 0 ?
+        let url = this.state.myI == 1 ?
             `/api/news/enterprise/select/${this.state.id}`
             : `/api/news/industry/select/${this.state.id}`;
         __GET(url)
@@ -65,9 +63,8 @@ export default class index extends Component {
                 this.setState({
                     ...this.state,
                     news: myJson,
-                    news_content: this.state.myI == 0 ? myJson.enterpriseNews : myJson.industryNews,
+                    news_content: this.state.myI == 1 ? myJson.enterpriseNews : myJson.industryNews,
                 });
-                console.log(myJson, 'pppp');
             })
             .catch(error => {
                 console.log(error);
@@ -79,7 +76,6 @@ export default class index extends Component {
                 myI: index
             })
         }, 0)
-        // console.log(index, this.state.myI, 'myI');
         this.getData(1)
     }
     onChange = (page, pageSize) => {
@@ -114,7 +110,7 @@ export default class index extends Component {
                         <Menu
                             onClick={this.handleClick}
                             style={{ width: 256 }}
-                            defaultSelectedKeys={['1']}
+                            defaultSelectedKeys={this.state.myI==1?'2':'1'}
                             defaultOpenKeys={['sub1']}
                             mode="inline"
                         >
@@ -153,7 +149,7 @@ export default class index extends Component {
                             </Breadcrumb.Item>
                             <Breadcrumb.Item>
                                 {
-                                    this.state.myI == 0 ? <span>公司资讯</span> : <span>行业新闻</span>
+                                    this.state.myI == 1 ? <span>公司资讯</span> : <span>行业新闻</span>
                                 }
                             </Breadcrumb.Item>
                         </Breadcrumb>

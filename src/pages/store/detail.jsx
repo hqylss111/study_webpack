@@ -23,7 +23,7 @@ export default class id extends Component {
                 title: '建筑工业标准（JG）'
             },
         }
-        console.log(this.state.id, this.state.type, this.state.url, '222');
+        // console.log(this.state.id, this.state.type, this.state.url, '222');
 
     }
     componentDidMount() {
@@ -43,7 +43,7 @@ export default class id extends Component {
                 console.log('error', error);
             });
         let urlCon = `/api/standard/library/type/${this.state?.type}/${this.state?.id}`;
-        console.log(urlCon);
+        // console.log(urlCon);
 
         __GET(urlCon)
             .then(response => {
@@ -64,7 +64,7 @@ export default class id extends Component {
         let share = `${window.location.host}${this.state.url}?type=${this.state.type}&&id=${this.state.id}`
         copy(share)
         message.success('页面链接已复制');
-        console.log(share);
+        // console.log(share);
     }
     download = () => {
         this.state?.store?.downloadUrl&&
@@ -74,7 +74,7 @@ export default class id extends Component {
         return (
             <div>
                 <Helmet encodeSpecialCharacters={false}>
-                    <title></title>
+                    <title>标准库、防火检测、耐火检测、华慧检测、燃烧性能检测</title>
                 </Helmet>
                 <div className={styles.contentCenter}>
                     <div className={styles.storeflex}>

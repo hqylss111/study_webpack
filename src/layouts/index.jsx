@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './index.less';
 import { ConfigProvider, BackTop, Anchor, Skeleton } from 'antd';
-import { NavLink } from 'react-router-dom'
+import { NavLink,Route,Switch } from 'react-router-dom'
 import locale from 'antd/lib/locale/zh_CN';
 import Mobile from '../pages/mobile'
 import { MyIcon } from '../pages/utils/index.js';
@@ -44,7 +44,7 @@ const initState = {
         },
         {
             text: "新闻资讯",
-            key: "/news"
+            key: "/news?myI=0"
         },
         {
             text: "标准库",
@@ -112,15 +112,15 @@ const initState = {
         },
         {
             title: "新闻资讯",
-            href: "/news",
+            href: `/news?myI=${0}`,
             data: [
                 {
                     href: `/news?myI=${0}`,
-                    text: "公司资讯"
+                    text: "行业新闻"
                 },
                 {
                     href: `/news?myI=${1}`,
-                    text: "行业新闻"
+                    text: "公司资讯"
                 }
             ]
         }
@@ -213,7 +213,7 @@ export default function Index(props) {
     }
     const handleClick = (e, link) => {
         e.preventDefault();
-        console.log(link);
+        // console.log(link);
     }
     const pushRouter = (url) => {
         window.location.href = url
@@ -224,8 +224,8 @@ export default function Index(props) {
     }
     return (
         <ConfigProvider locale={locale}>
-            <div className={styles.header_out} style={(!isFixed) ? { position: 'relative', top: 0, zIndex: 9, } : { position: 'fixed', top: 0, zIndex: 9 }}>
-                <div className={styles.header} ref={headList}>
+            <div className={styles.header_out} ref={headList} style={(!isFixed) ? { position: 'relative', top: 0, zIndex: 9, } : { position: 'fixed', top: 0, zIndex: 9 }}>
+                <div className={styles.header} >
                     <div>
                         <img src={enterprise.enterpriseImg} alt="上海华慧防火检测" draggable="false" />
                     </div>
@@ -261,7 +261,7 @@ export default function Index(props) {
                         <input className={styles.reportInput} type="text" name="reportNumber" placeholder="报告真伪查询" />
                     </div>
                 </div>
-                <div className={styles.nav} style={(!isFixed) ? { opacity: '1', transition: 'opacity 0.5s' } : { opacity: '0', transition: 'opacity 0.5s' }}>
+                <div className={styles.nav} >
                     {
                         initState.titleList.map((item, index) => {
                             return !item.data ?
@@ -275,7 +275,7 @@ export default function Index(props) {
                                     <div className={styles.title_Item2}>{item.text}</div>
                                     <div className={styles.nav_list}>
                                         {
-                                            index == 1&& listNew.length>0 &&
+                                            index == 1 && listNew.length > 0 &&
                                             listNew.map((items, i) => {
                                                 return <NavLink key={i} exact to={`/about/${items.id}`}>
                                                     <div className={styles.titleItem}>
@@ -285,9 +285,9 @@ export default function Index(props) {
                                             })
                                         }
                                         {
-                                            index == 2&&service.length>0 &&
+                                            index == 2 && service.length > 0 &&
                                             service.map((items, i) => {
-                                                return <NavLink key={i} exact to={`/service?id=${items.id}&i=${i}`}>
+                                                return <NavLink key={i} exact to={`/service/${items.businessDomains[0].id}?i=${i}`}>
                                                     <div className={styles.titleItem}>
                                                         <span >{items.title}</span>
                                                     </div>
@@ -351,7 +351,7 @@ export default function Index(props) {
 
                                                             }
                                                             {
-                                                                index == 1 &&listNew.length>0&&
+                                                                index == 1 && listNew.length > 0 &&
                                                                 listNew.map((it, i) => {
                                                                     return <li onClick={e => { pushRouter(`/about/${it.id}`) }} key={i}>
                                                                         <a >{it.subtitle}</a>
@@ -359,9 +359,9 @@ export default function Index(props) {
                                                                 })
                                                             }
                                                             {
-                                                                index == 2 &&service.length>0&&
+                                                                index == 2 && service.length > 0 &&
                                                                 service.map((it, i) => {
-                                                                    return <li onClick={e => { pushRouter(`/service?id=${it.id}&i=${i}`) }} key={i}>
+                                                                    return <li onClick={e => { pushRouter(`/service/${it.businessDomains[0].id}?i=${i}`) }} key={i}>
                                                                         <a >{it.title}</a>
                                                                     </li>
                                                                 })
@@ -391,7 +391,7 @@ export default function Index(props) {
                                     <MyIcon type='icon-email' className={styles.icon} />
                                     <div className={styles.emailOut} >
                                         邮箱：
-                                        <span className={styles.email} style={{whiteSpace:'pre-line' }}>{enterprise.enterpriseEmail}</span>
+                                        <span className={styles.email} style={{ whiteSpace: 'pre-line' }}>{enterprise.enterpriseEmail}</span>
                                     </div>
                                 </div>
                                 <div className={styles.right_text}>
@@ -419,13 +419,14 @@ export default function Index(props) {
                 <div className={styles.bottom}>
                     <a name='bottom' id='bottom' />
                     {
+                        props.location.pathname=='/'&&
                         link.length ?
                             <div className={styles.footLink}>
                                 <div className={styles.footLinkSpan}>友情链接：</div>
                                 <div className={styles.footLinkName}>
                                     {
                                         link.map((item, index) => {
-                                            return <a href={item.url} key={index} className={styles.src} target="_blank" >{item.name}</a>
+                                            return <a href={item.url} key={index} className={styles.src} target="_blank" rel="nofollow">{item.name}</a>
                                         })
                                     }
                                 </div>

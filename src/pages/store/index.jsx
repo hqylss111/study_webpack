@@ -5,6 +5,7 @@ import moment from 'moment'
 import Detail from './detail.jsx'
 import { MyIcon } from '../../pages/utils/index.js';
 import { __GET } from '../utils/fetchUtils.js';
+import { Helmet } from 'umi';
 
 export default class index extends Component {
     constructor(props) {
@@ -33,7 +34,7 @@ export default class index extends Component {
                     ...this.state,
                     titleList: myJson,
                 })
-                console.log(myJson);
+                // console.log(myJson);
 
             })
             .catch(error => {
@@ -42,7 +43,7 @@ export default class index extends Component {
         this.getInfo(this.state.nowPage, this.state.type)
     }
     getInfo = (page, type) => {
-        console.log(page, type, '000');
+        // console.log(page, type, '000');
 
         let urlList = `/api/standard/library/type/${type ? type : 'library_gbnational_standard'}/list?limit=${this.state.pageSize}&page=${page}`;
         // let urlList = `/api/standard/library/type/${type ? type : 'library_gbnational_standard'}/list?page=${page}&limit=${this.state.pageSize}`;
@@ -57,7 +58,7 @@ export default class index extends Component {
                     storelist: myJson.data,
                     type: type
                 })
-                console.log('this.state.store', this.state.store);
+                // console.log('this.state.store', this.state.store);
             })
             .catch(error => {
                 console.log('error', error);
@@ -91,6 +92,9 @@ export default class index extends Component {
     render() {
         return (
             <div>
+                <Helmet encodeSpecialCharacters={false}>
+                    <title>标准库、防火检测、耐火检测、华慧检测、燃烧性能检测</title>
+                </Helmet>
                 <div className={styles.header}>
                     <div className={styles.header_text}>
                         标准库
@@ -108,7 +112,7 @@ export default class index extends Component {
                             mode="inline"
                         >
                             {
-                                this.state?.titleList?.length>0&&
+                                this.state?.titleList?.length > 0 &&
                                 this.state?.titleList.map((item, index) => {
                                     return <Menu.Item
                                         key={index + 1}

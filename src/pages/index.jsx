@@ -67,11 +67,11 @@ export default class index extends Component {
         return response.json();
       })
       .then(myJson => {
-          this.setState({
-            ...this.state,
-            mechanism: myJson,
-          });
-        console.log(this.state.mechanism[0].description);
+        this.setState({
+          ...this.state,
+          mechanism: myJson,
+        });
+        // console.log(this.state.mechanism[0].description);
 
       })
       .catch(error => {
@@ -92,7 +92,7 @@ export default class index extends Component {
       .catch(error => {
         console.log(error);
       });
-    let url4 = `/api/news/enterprise/select/list?limit=8&page=1`;
+    let url4 = `/api/news/enterprise/select/list?limit=10&page=1`;
     __GET(url4)
       .then(response => {
         return response.json();
@@ -106,7 +106,7 @@ export default class index extends Component {
       .catch(error => {
         console.log(error);
       });
-    let url5 = `/api/news/industry/select/list?limit=8&page=1`;
+    let url5 = `/api/news/industry/select/list?limit=10&page=1`;
     __GET(url5)
       .then(response => {
         return response.json();
@@ -215,7 +215,7 @@ export default class index extends Component {
               <span className={styles.itemText}>为工程建筑公司、装饰装修公司、材料厂家提供专业阻燃检测服务</span>
             </div>
             <div onClick={e => {
-              this.pushRouter(`/service`)
+              this.pushRouter(`/service/${this.state.serviceList[0].businessDomains[0].id}?i=0`)
             }}>
               {/* <a href="/service"> */}
               <button className={styles.immediately} >查看详情    </button>
@@ -259,7 +259,7 @@ export default class index extends Component {
                         {/* <a href={`/service?id=${item.id}&i=${index}`}> */}
                         <div className={styles.content_01_footer}
                           onClick={e => {
-                            this.pushRouter(`/service?id=${item.id}&i=${index}`)
+                            this.pushRouter(`/service/${item.businessDomains[0].id}?i=${index}`)
                           }}
                         >
                           查看详情
@@ -371,7 +371,7 @@ export default class index extends Component {
                             <div >
                               <div
                                 className={styles.subsidiary_text}
-                                style={{whiteSpace:'pre-line' }}
+                                style={{ whiteSpace: 'pre-line' }}
                               >{item.description}</div>
                             </div>
                           </div>
@@ -416,7 +416,7 @@ export default class index extends Component {
                   <ul className={styles.news_ul}>
                     {
                       this.state.newsEnterprise.map((item, i) => {
-                        return <a onClick={e => { this.pushRouter(`/news/${item.id}?myI=${0}`) }} key={i}>
+                        return <a onClick={e => { this.pushRouter(`/news/${item.id}?myI=${1}`) }} key={i}>
                           <li key={i}>
                             <div
                               className={i == 0 ? styles.news_number_1 : styles.news_number &&
@@ -446,7 +446,7 @@ export default class index extends Component {
                 </div>
             }
             {
-              this.state.newsIndustry.length ?
+              this.state.newsIndustry.length > 0 ?
                 <div className={styles.news_list} key={index}>
                   <div className={styles.news_list_title}>
                     <span>行业新闻</span>
@@ -459,7 +459,7 @@ export default class index extends Component {
                   <ul className={styles.news_ul}>
                     {
                       this.state.newsIndustry.map((item, i) => {
-                        return <a key={i} onClick={e => { this.pushRouter(`/news/${item.id}?myI=${1}`) }}>
+                        return <a key={i} onClick={e => { this.pushRouter(`/news/${item.id}?myI=${0}`) }}>
                           <li key={i}>
                             <div
                               className={i == 0 ? styles.news_number_1 : styles.news_number &&

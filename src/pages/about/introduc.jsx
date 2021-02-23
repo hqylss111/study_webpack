@@ -85,7 +85,7 @@ export default class introduc extends Component {
                                     </div>
                                     : <Skeleton />
                             }
-                            {console.log(this.state.introduc.content1) }
+                            {/* {console.log(this.state.introduc.content1) } */}
                         </div>
                     </div>
                     <div className={styles.introduc_content_2}>

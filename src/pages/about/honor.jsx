@@ -26,7 +26,7 @@ export default class honor extends Component {
                 id:prevProps.id
             })
         }
-        console.log(prevState,prevProps,this.state.id);
+        // console.log(prevState,prevProps,this.state.id);
     }
     getList = (id) => {
         let url = `/api/testing/organization/select/${id}/honor`;
@@ -40,7 +40,7 @@ export default class honor extends Component {
                     data: myJson,
                     imgArray: myJson.img1 ? myJson.img1.split(',') : [''],
                 });
-                console.log(myJson);
+                // console.log(myJson);
             })
             .catch(error => {
                 console.log(error);

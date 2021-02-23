@@ -10,20 +10,20 @@ export default class index extends Component {
         super()
         this.state = {
             serve: [],
-            myIndex: 0,
-            myIndex2: 0,
+            // myIndex: 0,
+            // myIndex2: 0,
             myId: 1,
             business: {},
             service: [],
-            myTitle: ''
-        }
+            myTitle: '',
+        } 
     }
     componentDidMount() {
         this.getData()
     }
     componentWillReceiveProps(nextProps) {
         const { dispatch } = this.props;
-        if (this.props.location.query.id != nextProps.location.query.id) {
+        if (this.props.location.query.i != nextProps.location.query.i) {
             history.go(0)
         }
     }
@@ -37,29 +37,31 @@ export default class index extends Component {
                 this.setState({
                     ...this.state,
                     serve: myJson,
-                    myId: this.props.location.query.id ?
+                    myId: this.props.match.params.id==0 ?
                         myJson[this.props.location.query.i]?.businessDomains[0]?.id :
-                        myJson[0].businessDomains[0].id,
-                    business: this.props.location.query.id ?
-                        myJson[this.props.location.query.i].businessDomains[0] :
-                        myJson[0].businessDomains[0],
-                    myTitle: this.props.location.query.id ?
+                        this.props.match.params.id,
+                    business: this.props.match.params.id==0 &&
+                        myJson[this.props.location.query.i].businessDomains[0] ,
+                    myTitle: this.props.match.params.id==0 ?
                         myJson[this.props.location.query.i].title :
                         myJson[0].title
                 });
-
+                
+                myJson[this.props.location.query.i].businessDomains.map((item)=>{
+                    if(this.props.match.params.id==item.id){
+                        this.setState({
+                            business:item
+                        })
+                    }
+                })
                 if (this.state.myId)
                     this.getService()
-
-                console.log(myJson, '11111111');
-
             })
             .catch(error => {
                 console.log(error);
             });
     }
     getService = () => {
-        console.log(this.state.myId, 'myid');
         let url = `/api/service_domain/business/${this.state.myId}`
         __GET(url)
             .then(response => {
@@ -70,8 +72,6 @@ export default class index extends Component {
                     ...this.state,
                     service: myJson,
                 });
-                console.log(this.state.service, myJson);
-                console.log(this.state.myId, 'myid');
             })
             .catch(error => {
                 console.log(error);
@@ -94,12 +94,15 @@ export default class index extends Component {
         })
 
     }
+    pushRouter = (url) => {
+        window.location.href = url
+    }
     render() {
         return (
             <div>
-                <Helmet encodeSpecialCharacters={false}>
+                {/* <Helmet encodeSpecialCharacters={false}>
                     <title>防火材料检测、防火等级检测、耐火材料检测、华慧检测</title>
-                </Helmet>
+                </Helmet> */}
                 <div className={styles.header}>
                     <div className={styles.header_text}>
                         防火阻燃检测
@@ -109,36 +112,44 @@ export default class index extends Component {
                 <div className={styles.content_flex}>
                     <div className={styles.content_list}>
                         <div className={styles.content_top}>业务领域</div>
-                        {console.log(this.props.location.query.i)}
-                        <Menu
-                            onClick={this.handleClick}
-                            style={{ width: 256 }}
-                            defaultSelectedKeys={['1']}
-                            defaultOpenKeys={[this.props.location.query.i ? this.props.location.query.i : '0']}
-                            mode="inline"
-                        >
-                            {
-                                this.state.serve.length > 0 ?
-                                    this.state.serve.map((item, index) => {
-                                        return <SubMenu key={index} title={item.title}>
-                                            {
-                                                item.businessDomains.map((it, i) => {
-                                                    return <Menu.Item
-                                                        key={this.state.myIndex++}
-                                                        onClick={() => this.changeStore(it, it.id, i, item.title)}
-                                                    >
-                                                        {it.title}
-                                                    </Menu.Item>
-                                                })
-                                            }
+                        {
+                            this.state?.serve&&this.state?.serve[this.props.location.query.i]&&
+                            <Menu
+                                onClick={this.handleClick}
+                                style={{ width: 256 }}
+                                defaultSelectedKeys={[this.state?.serve[this.props.location.query.i]?.businessDomains[0]?.id.toString()]}
+                                defaultOpenKeys={[this.props.location.query.i ? this.props.location.query.i : '0']}
+                                mode="inline"
+                            >
+                                {
+                                    this.state.serve.length > 0 ?
+                                        this.state.serve.map((item, index) => {
+                                            return <SubMenu key={index} title={item.title}>
+                                                {
+                                                    item.businessDomains.map((it, i) => {
+                                                        return <Menu.Item
+                                                            style={{
+                                                                color:Number(this.props.match.params.id) === it.id ? '#C2264E': 'null'
+                                                            }}
+                                                            key={it.id}
+                                                            // onClick={() => this.changeStore(it, it.id, i, item.title)}
+                                                            onClick={e => {
+                                                                this.pushRouter(`/service/${it.id}?i=${index}`)
+                                                            }}
+                                                        >
+                                                            {it.title}
+                                                        </Menu.Item>
+                                                    })
+                                                }
+                                            </SubMenu>
+                                        })
+                                        :
+                                        <SubMenu title=''>
+                                            <Skeleton paragraph={{ rows: 1 }} />
                                         </SubMenu>
-                                    })
-                                    :
-                                    <SubMenu title=''>
-                                        <Skeleton paragraph={{ rows: 1 }} />
-                                    </SubMenu>
-                            }
-                        </Menu>
+                                }
+                            </Menu>
+                        }
                     </div>
                     <div className={styles.introduc}>
                         <Breadcrumb className={styles.breadcrumb}>
@@ -200,10 +211,10 @@ export default class index extends Component {
                                             </div>
                                             <span>标准介绍：</span>
                                             <span
-                                             style={{ whiteSpace: 'pre-line' }}
-                                                // dangerouslySetInnerHTML={{ __html: item.introduction }}
+                                                style={{ whiteSpace: 'pre-line' }}
+                                            // dangerouslySetInnerHTML={{ __html: item.introduction }}
                                             >
-                                                { item.introduction }
+                                                {item.introduction}
                                             </span>
                                         </div>
                                         <div className={styles.text}>

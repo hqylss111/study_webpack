@@ -6,7 +6,7 @@ import moment from 'moment'
 
 export default class detail extends Component {
     constructor(props) {
-        console.log(props, 'props');
+        // console.log(props, 'props');
         super();
         this.state = {
             id: props.id,
@@ -33,8 +33,6 @@ export default class detail extends Component {
                     news: myJson,
                     news_content: this.state.myI == 0 ? myJson.enterpriseNews : myJson.industryNews,
                 });
-                console.log(myJson);
-
             })
             .catch(error => {
                 console.log(error);
@@ -63,11 +61,10 @@ export default class detail extends Component {
                     </Breadcrumb.Item>
                     <Breadcrumb.Item>
                         {
-                            this.state.myI == 0 ? <span>公司资讯</span> : <span>行业新闻</span>
+                            this.state.myI == 1 ? <span>公司资讯</span> : <span>行业新闻</span>
                         }
                     </Breadcrumb.Item>
                 </Breadcrumb>
-                {console.log(this.state.news?.enterpriseNews, '0000')}
                 <div className={styles.news_title}>{this.state?.news_content.title}</div>
                 <div className={styles.news_des}>
                     文章来源：

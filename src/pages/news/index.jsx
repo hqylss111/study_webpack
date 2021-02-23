@@ -12,7 +12,7 @@ export default class index extends Component {
         super()
         this.state = {
             newsType: [
-                '公司资讯', '行业新闻'
+                '行业新闻', '公司资讯'
             ],
             count: 0,
             newsList: [],
@@ -23,15 +23,12 @@ export default class index extends Component {
             myid: props.location.query.id ? props.location.query.id : 0,
             myI: props.location.query.myI ? props.location.query.myI : 0,
         }
-        console.log(props, '111111')
     }
     componentDidMount() {
         this.getData(this.state.nowPage)
     }
     getData = (page) => {
-        console.log(this.state.myI, 'myI1111111');
-
-        let url = this.state.myI == 0 ?
+        let url = this.state.myI == 1 ?
             `/api/news/enterprise/select/list?limit=${this.state.pageSize}&page=${page}`
             : `/api/news/industry/select/list?limit=${this.state.pageSize}&page=${page}`;
         __GET(url)
@@ -54,9 +51,9 @@ export default class index extends Component {
             this.setState({
                 myI: index
             })
+            this.getData(1)
         }, 0)
-        console.log(index, this.state.myI, 'myI');
-        this.getData(1)
+       
     }
     onChange = (page, pageSize) => {
         this.getData(page)
@@ -93,7 +90,7 @@ export default class index extends Component {
                         <Menu
                             onClick={this.handleClick}
                             style={{ width: 256 }}
-                            defaultSelectedKeys={['1']}
+                            defaultSelectedKeys={this.state.myI==1?'2':'1'}
                             defaultOpenKeys={['sub1']}
                             mode="inline"
                         >
@@ -103,9 +100,11 @@ export default class index extends Component {
                                         key={index + 1}
                                         onClick={() => this.changeStore(index)}
                                     >
-                                        <div onClick={e => {
-                                            this.pushRouter(`/news?myI=${index}`)
-                                        }}>
+                                        <div 
+                                        // onClick={e => {
+                                        //     this.pushRouter(`/news?myI=${index}`)
+                                        // }}
+                                        >
                                             {item}
                                         </div>
                                     </Menu.Item>
@@ -134,13 +133,13 @@ export default class index extends Component {
                                 </Breadcrumb.Item>
                                 <Breadcrumb.Item>
                                     {
-                                        this.state.myI == 0 ? <span>公司资讯</span> : <span>行业新闻</span>
+                                        this.state.myI == 1 ? <span>公司资讯</span> : <span>行业新闻</span>
                                     }
                                 </Breadcrumb.Item>
                             </Breadcrumb>
                             <div className={styles.introduc_title}>
                                 {
-                                    this.state.myI == 0 ? <span>公司资讯</span> : <span>行业新闻</span>
+                                    this.state.myI ==1 ? <span>公司资讯</span> : <span>行业新闻</span>
                                 }
                             </div>
                             {

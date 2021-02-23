@@ -58,7 +58,7 @@ export default class index extends Component {
                     ...this.state,
                     company: myJson,
                 });
-                console.log(this.state.list);
+                // console.log(this.state.list);
 
             })
             .catch(error => {
@@ -76,9 +76,9 @@ export default class index extends Component {
     render() {
         return (
             <div>
-                <Helmet encodeSpecialCharacters={false}>
+                {/* <Helmet encodeSpecialCharacters={false}>
                     <title>关于我们、建材防火检测、上海防火检测机构、华慧检测</title>
-                </Helmet>
+                </Helmet> */}
                 <div className={styles.header}>
                     <div className={styles.header_text}>
                         国内专业的防火检测一站式服务企业

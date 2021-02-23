@@ -22,7 +22,7 @@ export default class contact extends Component {
                 id:prevProps.id
             })
         }
-        console.log(prevState,prevProps,this.state.id);
+        // console.log(prevState,prevProps,this.state.id);
     }
     getList = (id) => {
         let url = `/api/testing/organization/select/${id}/us`;
@@ -35,7 +35,7 @@ export default class contact extends Component {
                     ...this.state,
                     data: myJson,
                 });
-                console.log(myJson);
+                // console.log(myJson);
             })
             .catch(error => {
                 console.log(error);

@@ -17,18 +17,23 @@ export default class index extends Component {
             id: props.match.params.id,
             allList: [
                 {
+                    id: 1,
                     title: '公司简介',
                 },
                 {
+                    id: 2,
                     title: '企业风貌',
                 },
                 {
+                    id: 3,
                     title: '资质荣誉',
                 },
                 {
+                    id: 4,
                     title: '检测流程',
                 },
                 {
+                    id: 5,
                     title: '联系我们',
                 },
             ],
@@ -42,7 +47,7 @@ export default class index extends Component {
         const { dispatch } = this.props;
         if (this.props.match.params.id != nextProps.match.params.id) {
             history.go(0)
-        }        
+        }
     }
     componentDidMount() {
         this.getData()
@@ -92,7 +97,7 @@ export default class index extends Component {
                             onClick={this.handleClick}
                             style={{ width: 256 }}
                             defaultSelectedKeys={['1']}
-                            defaultOpenKeys={['0','1']}
+                            defaultOpenKeys={['0', '1']}
                             mode="inline"
                         >
                             {
@@ -102,9 +107,10 @@ export default class index extends Component {
                                             this.state.allList.map((it, i) => {
                                                 return <Menu.Item
                                                     key={
-                                                        index == 0 ? i + 1 : i + 1
-                                                            && index == 1 ? i + 6 : i + 1
-                                                                && index == 2 ? i + 11 : i + 1
+                                                        index == 0 ? it.id : it.id
+                                                            && index == 1 ? it.id + 6 : it.id
+                                                                && index == 2 ? it.id + 11 : it.id
+                                                                    && index == 3 ? it.id + 16 : it.id
                                                     }
                                                     onClick={() => this.changeStore(item.name, i, item.id)}
                                                 >

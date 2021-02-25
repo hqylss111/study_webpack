@@ -42,7 +42,22 @@ module.exports = {
                         limit: 2048 // limit ==> 如果图片大于 2048 kb 就会被打包成静态的资源 如果没有 webpack就会打包成base64
                     }
                 }
-            }
+            },
+            {
+                test: /.scss$/,
+                //执行顺序是从 下往上执行的 先执行 css-loader 在执行 style-loader
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: { 
+                            modules: true //启动模块化模式  这样他只会在你当前的模块生效  这样就启动了css-modules模块化了
+                        }
+                    },
+                    'postcss-loader', //例如css3 加上每个商家的前缀  到这里的时候他会去找POSTCSS.CONFIG.JS 然后使用里面引入的插件
+                    "sass-loader"
+                ]
+            },
         ]
     },
     //plugins 是插件集合 
